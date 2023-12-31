@@ -1,21 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAHUN BARU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .fireworksDiv {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .container {
+            position: absolute;
+            background-image: linear-gradient(35deg, #f1f1f1,#dadada);
+            width: 40rem;
+            height: 30rem;
+            border-radius: 12px;
+            border: 1px solid rgb(223, 223, 223);
+            box-shadow: -5px 4px 30px rgb(223, 222, 222);
+
+        }
+
+        .container .navbar {
+            bottom: 0;
+            font-size: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(to right, rgba(255, 6, 6), rgba(207, 20, 20));
+            gap: 5px;
+            color: white;
+            border-radius: 12px 12px 0px 0px;
+        }
+
+        .container h1 {
+            font-size: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* font-family: ; */
+        }
+
+        .container .waktu {
+            font-size: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* font-weight: bold; */
+            margin-top: -40px;
+        }
+
+        .container .tanggal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            background-color: #ffff;
+            margin: 30px 160px 0px 160px;
+            padding: 10px;
+            border-radius: 100px;
+        }
+    </style>
+
+    <!-- Script Ionic -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
     <div class="fireworksDiv">
         <div class="container">
-            <h1 id="tahun">Tahun ini <span>2023</span></h1>
+            <div class="navbar">
+                <div class="icon">
+                    <ion-icon name="calendar" style="transform: translateY(3.5px);"></ion-icon>
+                </div>
+                <div class="kalender">Kalender</div>
+            </div>
+            <h1 id="tahun">Tahun ini <span> 2023</span></h1>
             <div class="waktu" id="waktu"></div>
             <div class="tanggal" id="tanggal"></div>
         </div>
     </div>
 
     <audio id="fireworksAudio" src="mercon.mp3"></audio>
- 
+
     <script>
         const audioElement = document.getElementById("fireworksAudio");
 
@@ -26,10 +110,10 @@
             const detik = now.getSeconds();
 
             const waktu_element = document.getElementById("waktu");
-            waktu_element.textContent = `${jam.toString().padStart(2,'0')}:${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`;
+            waktu_element.textContent = `${jam.toString().padStart(2, '0')}:${menit.toString().padStart(2, '0')}:${detik.toString().padStart(2, '0')}`;
 
             const tanggal_element = document.getElementById("tanggal");
-            const options = { weekday:'long', year:'numeric', month:'long', day:'numeric'};
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const tanggal_string = now.toLocaleDateString('id-ID', options);
             tanggal_element.textContent = tanggal_string;
 
@@ -37,7 +121,7 @@
             if (now.getFullYear() === 2023) {
                 tahun.innerHTML = "Tahun ini <span>2023</span>";
             } else {
-                tahun.innerHTML = "Selamat Tahun Baru <span>2024</span>";
+                tahun.innerHTML = "Selamat Tahun Baru <span> 2024</span>";
                 audioElement.play();
                 showFireworks();
             }
@@ -54,7 +138,7 @@
 
             fireworks.start();
 
-            setTimeout(function(){
+            setTimeout(function () {
                 fireworks.stop();
                 audioElement.pause();
             }, 10000);
@@ -66,4 +150,5 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/fireworks-js@latest/dist/fireworks.js"></script>
 </body>
+
 </html>
