@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAHUN BARU</title>
+</head>
+<body>
+    <div class="fireworksDiv">
+        <div class="container">
+            <h1 id="tahun">Tahun ini <span>2023</span></h1>
+            <div class="waktu" id="waktu"></div>
+            <div class="tanggal" id="tanggal"></div>
+        </div>
+    </div>
+
+    <audio id="fireworksAudio" src="mercon.mp3"></audio>
+ 
+    <script>
+        const audioElement = document.getElementById("fireworksAudio");
+
+        function update_waktu() {
+            const now = new Date();
+            const jam = now.getHours();
+            const menit = now.getMinutes();
+            const detik = now.getSeconds();
+
+            const waktu_element = document.getElementById("waktu");
+            waktu_element.textContent = `${jam.toString().padStart(2,'0')}:${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`;
+
+            const tanggal_element = document.getElementById("tanggal");
+            const options = { weekday:'long', year:'numeric', month:'long', day:'numeric'};
+            const tanggal_string = now.toLocaleDateString('id-ID', options);
+            tanggal_element.textContent = tanggal_string;
+
+            const tahun = document.getElementById("tahun");
+            if (now.getFullYear() === 2023) {
+                tahun.innerHTML = "Tahun ini <span>2023</span>";
+            } else {
+                tahun.innerHTML = "Selamat Tahun Baru <span>2024</span>";
+                audioElement.play();
+                showFireworks();
+            }
+        }
+
+        function showFireworks() {
+            const fireDiv = document.querySelector(".fireworksDiv");
+            const fireworks = new Fireworks(fireDiv, {
+                delay: { min: 2, max: 3 },
+                trace: 5,
+                speed: 0.5,
+                particles: 200,
+            });
+
+            fireworks.start();
+
+            setTimeout(function(){
+                fireworks.stop();
+                audioElement.pause();
+            }, 10000);
+        }
+
+        setInterval(update_waktu, 1000);
+        update_waktu();
+    </script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/fireworks-js@latest/dist/fireworks.js"></script>
+</body>
+</html>
