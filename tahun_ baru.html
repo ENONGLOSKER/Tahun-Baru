@@ -101,7 +101,7 @@
     <audio id="fireworksAudio" src="mercon.mp3"></audio>
 
     <script>
-        const audioElement = document.getElementById("fireworksAudio");
+       
 
         function update_waktu() {
             const now = new Date();
@@ -122,25 +122,36 @@
                 tahun.innerHTML = "Tahun ini <span>2023</span>";
             } else {
                 tahun.innerHTML = "Selamat Tahun Baru <span> 2024</span>";
-                audioElement.play();
+                
                 showFireworks();
             }
         }
 
         function showFireworks() {
+            const audioElement = document.getElementById("fireworksAudio");
             const fireDiv = document.querySelector(".fireworksDiv");
             const fireworks = new Fireworks(fireDiv, {
-                delay: { min: 2, max: 3 },
+                delay: { min:15, max: 30},
                 trace: 5,
                 speed: 0.5,
                 particles: 200,
+                enabled: false,
+                files: [
+                    'explosion0.mp3',
+                    'explosion1.mp3',
+                    'explosion2.mp3'
+                ],
+                volume: {
+                    min: 4,
+                    max: 8
+                }
             });
-
+            audioElement.play();
             fireworks.start();
 
             setTimeout(function () {
                 fireworks.stop();
-                audioElement.pause();
+                audioElement.stop();
             }, 10000);
         }
 
