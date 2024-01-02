@@ -9,75 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Kanit', sans-serif;
-        }
-
-        .fireworksDiv {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        .container {
-            position: absolute;
-            background-image: linear-gradient(35deg, #f1f1f1,#dadada);
-            width: 40rem;
-            height: 30rem;
-            border-radius: 12px;
-            border: 1px solid rgb(223, 223, 223);
-            box-shadow: -5px 4px 30px rgb(223, 222, 222);
-
-        }
-
-        .container .navbar {
-            bottom: 0;
-            font-size: 20px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            background-image: linear-gradient(to right, rgba(255, 6, 6), rgba(207, 20, 20));
-            gap: 5px;
-            color: white;
-            border-radius: 12px 12px 0px 0px;
-        }
-
-        .container h1 {
-            font-size: 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* font-family: ; */
-        }
-
-        .container .waktu {
-            font-size: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* font-weight: bold; */
-            margin-top: -40px;
-        }
-
-        .container .tanggal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 25px;
-            background-color: #ffff;
-            margin: 30px 160px 0px 160px;
-            padding: 10px;
-            border-radius: 100px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="style.css">
     <!-- Script Ionic -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -100,65 +32,7 @@
 
     <audio id="fireworksAudio" src="mercon.mp3"></audio>
 
-    <script>
-       
-
-        function update_waktu() {
-            const now = new Date();
-            const jam = now.getHours();
-            const menit = now.getMinutes();
-            const detik = now.getSeconds();
-
-            const waktu_element = document.getElementById("waktu");
-            waktu_element.textContent = `${jam.toString().padStart(2, '0')}:${menit.toString().padStart(2, '0')}:${detik.toString().padStart(2, '0')}`;
-
-            const tanggal_element = document.getElementById("tanggal");
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const tanggal_string = now.toLocaleDateString('id-ID', options);
-            tanggal_element.textContent = tanggal_string;
-
-            const tahun = document.getElementById("tahun");
-            if (now.getFullYear() === 2023) {
-                tahun.innerHTML = "Tahun ini <span>2023</span>";
-            } else {
-                tahun.innerHTML = "Selamat Tahun Baru <span> 2024</span>";
-                
-                showFireworks();
-            }
-        }
-
-        function showFireworks() {
-            const audioElement = document.getElementById("fireworksAudio");
-            const fireDiv = document.querySelector(".fireworksDiv");
-            const fireworks = new Fireworks(fireDiv, {
-                delay: { min:15, max: 30},
-                trace: 5,
-                speed: 0.5,
-                particles: 200,
-                enabled: false,
-                files: [
-                    'explosion0.mp3',
-                    'explosion1.mp3',
-                    'explosion2.mp3'
-                ],
-                volume: {
-                    min: 4,
-                    max: 8
-                }
-            });
-            audioElement.play();
-            fireworks.start();
-
-            setTimeout(function () {
-                fireworks.stop();
-                audioElement.stop();
-            }, 10000);
-        }
-
-        setInterval(update_waktu, 1000);
-        update_waktu();
-    </script>
-
+    <script src="script.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/fireworks-js@latest/dist/fireworks.js"></script>
 </body>
 
